@@ -40,6 +40,29 @@ class Graph{
         }
     }
 
+
+    knightMoves(start, end){
+        const paths = [];
+        const visited = new Set();
+        const queue = [];
+        queue.push([start, [start]]);
+        while (queue.length>0){
+            let [current, path]=queue.shift();
+            visited.add(current);
+            if (current===end){
+                paths.push(path);
+            }
+            const neighbors=this.chessboard.get(current);
+            for (let pos of neighbors){
+                if (!visited.has(pos)){
+                    queue.push([pos, [...path,pos]]);
+                }
+            }
+        }
+        console.log(`Fastest Routes from ${start} to ${end}`)
+        paths.forEach(element => console.log(element));
+    }
+
 }
 
 
@@ -48,4 +71,3 @@ g = new Graph();
 g.addVertices()
 g.addEdges();
 
-console.log(g)
