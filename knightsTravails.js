@@ -43,6 +43,7 @@ class Graph{
 
     knightMoves(start, end){
         const paths = [];
+        let fastestPath=[];
         const visited = new Set();
         const queue = [];
         queue.push([start, [start]]);
@@ -59,8 +60,14 @@ class Graph{
                 }
             }
         }
-        console.log(`Fastest Routes from ${start} to ${end}`)
-        paths.forEach(element => console.log(element));
+        fastestPath=paths[0]
+        for(let i=0; i<paths.length; i++){
+            if (paths[i].length<fastestPath.length){
+                fastestPath=paths[i];
+            }
+        }
+        console.log(`Fastest path from (${start}) to (${end}), you made it in ${fastestPath.length-1} moves ! Here is your path:`)
+        console.log(fastestPath);
     }
 
 }
@@ -70,4 +77,7 @@ g = new Graph();
 
 g.addVertices()
 g.addEdges();
+
+
+g.knightMoves('0,0','6,5')
 
